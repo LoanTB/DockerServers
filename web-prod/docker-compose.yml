@@ -10,13 +10,22 @@ services:
           RUN docker-php-ext-install pdo pgsql pdo_pgsql
           COPY app/src /var/www/html/
     networks:
-      - web
+      - external
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`prod.td-grp0.anthonymoll.fr`)"
+      - "traefik.http.routers.app.rule=Host(`prod.td-grp1.anthonymoll.fr`)"
       - "traefik.http.routers.app.entrypoints=web"
       - "traefik.http.services.app.loadbalancer.server.port=80"
+    logging:
+      driver: loki
+      options:
+        loki-url: http://127.0.0.1:3100/loki/api/v1/push
+        loki-pipeline-stages: |
+          - regex:
+              expression: '(level|lvl|severity)=(?P<level>\w+)'
+          - labels:
+              level:
 
   db:
     image: postgres:13
@@ -30,7 +39,7 @@ services:
       - db
 
 networks:
-  web:
+  external:
     external: true
   db:
     external: false

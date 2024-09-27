@@ -15,14 +15,16 @@
 
 ### init-manager.sh
 
-
-#### V1
-
 Lancer le script : `./init-manager.sh` 
-Récupérer le TOKEN, IP_HOST et PORT pour le fournir.
+
+Quitter une fois les nodes connectées.
 
 ### init-node.sh
 
-#### V1 
+#### manuel
 Récupérez les informations du manager.
 Lancer le script : `./init-node.sh [TOKEN du manager] [IP HOST] [PORT]`
+
+#### automatic
+
+Lancer le script : `./init-node.sh`

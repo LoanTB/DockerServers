@@ -10,8 +10,8 @@ services:
           RUN docker-php-ext-install pdo pgsql pdo_pgsql
           COPY app/src /var/www/html/
     networks:
-      - web
       - db
+      - external
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.app.rule=Host(`dev.td-grp1.anthonymoll.fr`)"
@@ -31,7 +31,9 @@ services:
 
 networks:
   db:
-    external: false
+  external:
+    external: true
+  
 
 volumes:
   db_data:

@@ -15,6 +15,13 @@
 
 ### init-manager.sh
 
+#### manuel
+Lancer le script : `./init-manager.sh` 
+
+Récupérer les informations pour les fournir aux nodes : TOKEN HOST et PORT.
+
+#### automatic
+
 Lancer le script : `./init-manager.sh` 
 
 Quitter une fois les nodes connectées.

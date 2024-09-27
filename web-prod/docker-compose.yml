@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile_inline: |
+          FROM php:7.2-apache
+          RUN apt update && apt install -y libpq-dev
+          RUN docker-php-ext-install pdo pgsql pdo_pgsql
+          COPY app/src /var/www/html/
+    networks:
+      - web
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`prod.td-grp0.anthonymoll.fr`)"
+      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.services.app.loadbalancer.server.port=80"
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - db
+
+networks:
+  web:
+    external: true
+  db:
+    external: false
+
+volumes:
+  db_data:

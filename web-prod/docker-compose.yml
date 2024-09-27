@@ -6,8 +6,9 @@ services:
       context: .
       dockerfile_inline: |
           FROM php:7.2-apache
-          RUN apt update && apt install -y libpq-dev
-          RUN docker-php-ext-install pdo pgsql pdo_pgsql
+          RUN apt-get update && apt-get install -y \
+              default-libmysqlclient-dev \
+              && docker-php-ext-install mysqli pdo pdo_mysql
           COPY app/src /var/www/html/
     networks:
       - external
@@ -26,15 +27,18 @@ services:
               expression: '(level|lvl|severity)=(?P<level>\w+)'
           - labels:
               level:
+    ports : 
+        - "8100:80"
 
   db:
-    image: postgres:13
+    image: mysql:5.7
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydb
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/mysql
     networks:
       - db
 

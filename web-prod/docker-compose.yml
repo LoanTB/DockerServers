@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app:
+  app-prod:
     build:
       context: .
       dockerfile_inline: |
@@ -27,7 +27,7 @@ services:
           - labels:
               level:
 
-  db:
+  db-prod:
     image: postgres:13
     environment:
       POSTGRES_USER: user

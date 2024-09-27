@@ -14,11 +14,9 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`dev.td-grp0.anthonymoll.fr`)"
+      - "traefik.http.routers.app.rule=Host(`dev.td-grp1.anthonymoll.fr`)"
       - "traefik.http.routers.app.entrypoints=web"
       - "traefik.http.services.app.loadbalancer.server.port=80"
-    ports:
-      - "8080:80"
 
   db:
     image: postgres:13

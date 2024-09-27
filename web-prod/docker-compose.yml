@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  app:
+  app-prod:
     build:
       context: .
       dockerfile_inline: |

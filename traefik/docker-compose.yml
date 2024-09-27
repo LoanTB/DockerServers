@@ -1,3 +1,7 @@
+networks:
+  external:
+    external: true
+
 services:
   traefik:
     image: traefik:v2.10

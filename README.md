@@ -13,6 +13,8 @@
 
 ## Scripts
 
+*Les scripts automatiques nécéssitent netcat.
+
 ### init-manager.sh
 
 #### manuel
@@ -20,7 +22,7 @@ Lancer le script : `./init-manager.sh`
 
 Récupérer les informations pour les fournir aux nodes : TOKEN HOST et PORT.
 
-#### automatic
+#### automatic*
 
 Lancer le script : `./init-manager.sh` 
 
@@ -32,6 +34,6 @@ Quitter une fois les nodes connectées.
 Récupérez les informations du manager.
 Lancer le script : `./init-node.sh [TOKEN du manager] [IP HOST] [PORT]`
 
-#### automatic
+#### automatic*
 
 Lancer le script : `./init-node.sh`

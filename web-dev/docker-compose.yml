@@ -14,7 +14,7 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`prod.td-grp0.anthonymoll.fr`)"
+      - "traefik.http.routers.app.rule=Host(`dev.td-grp0.anthonymoll.fr`)"
       - "traefik.http.routers.app.entrypoints=web"
       - "traefik.http.services.app.loadbalancer.server.port=80"
     ports:

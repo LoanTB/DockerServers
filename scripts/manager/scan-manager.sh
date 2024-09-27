@@ -1,0 +1,1 @@
+watch docker node ls

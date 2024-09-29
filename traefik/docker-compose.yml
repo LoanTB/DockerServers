@@ -15,9 +15,10 @@ services:
       - "8080:8080"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`treafik.td-grp1.anthonymoll.fr`)"
-      - "traefik.http.routers.app.entrypoints=web"
-      - "traefik.http.services.app.loadbalancer.server.port=80"
+      - "traefik.docker.network=external"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.td-grp1.anthonymoll.fr`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.services.traefik.loadbalancer.server.port=80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:

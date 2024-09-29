@@ -8,8 +8,6 @@ networks:
 services:
   loki:
     image: harbinfo.iutmontp.univ-montp2.fr/proxy_dockerhub/grafana/loki:2.9.0
-    ports:
-      - "3100:3100"
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
@@ -47,8 +45,6 @@ services:
         EOF
         /run.sh
     image: harbinfo.iutmontp.univ-montp2.fr/proxy_dockerhub/grafana/grafana:latest
-    ports:
-      - "3000:3000"
     networks:
       - loki
       - external

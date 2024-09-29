@@ -9,8 +9,6 @@ services:
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-    ports:
-      - "8005:8080"
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=external"

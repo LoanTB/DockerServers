@@ -13,6 +13,7 @@ services:
       - "8005:8080"
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=external"
       - "traefik.http.routers.cadvisor1.rule=Host(`monitoring.td-grp1.anthonymoll.fr`)"
       - "traefik.http.routers.cadvisor1.entrypoints=web"
       - "traefik.http.services.cadvisor1.loadbalancer.server.port=8080"

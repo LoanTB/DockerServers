@@ -1,5 +1,6 @@
 include:
   - traefik/docker-compose.yml
-  - web-prob/docker-compose.yml
+  - web-prod/docker-compose.yml
+  - web-dev/docker-compose.yml
   - grafana/docker-compose.yml
   - cadvisor/docker-compose.yml

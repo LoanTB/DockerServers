@@ -37,3 +37,9 @@ Lancer le script : `./init-node.sh [TOKEN du manager] [IP HOST] [PORT]`
 #### automatic*
 
 Lancer le script : `./init-node.sh`
+
+# Working group (G3)
+- Paul Jacquemin
+- Katia Auxilien
+- Jade Renaut
+- Loan Tremoulet Breton

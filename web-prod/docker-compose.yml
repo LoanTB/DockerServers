@@ -15,7 +15,7 @@ services:
       - db
     labels:
       - "traefik.enable=true"
-      - "traefik.docker.network=docker_external"
+      - "traefik.docker.network=external"
       - "traefik.http.routers.app.rule=Host(`prod.td-grp1.anthonymoll.fr`)"
       - "traefik.http.routers.app.entrypoints=web"
       - "traefik.http.services.app.loadbalancer.server.port=80"

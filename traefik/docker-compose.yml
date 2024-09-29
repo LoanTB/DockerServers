@@ -1,0 +1,26 @@
+networks:
+  external:
+    external: true
+
+services:
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=external"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.td-grp1.anthonymoll.fr`)"
+      - "traefik.http.routers.traefik.entrypoints=web"
+      - "traefik.http.services.traefik.loadbalancer.server.port=80"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - external
+

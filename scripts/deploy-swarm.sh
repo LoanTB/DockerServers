@@ -1,0 +1,2 @@
+cd ..
+docker stack deploy

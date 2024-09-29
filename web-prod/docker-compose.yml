@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  app-prod:
+    build:
+      context: .
+      dockerfile_inline: |
+          FROM php:7.2-apache
+          RUN apt-get update && apt-get install -y \
+              default-libmysqlclient-dev \
+              && docker-php-ext-install mysqli pdo pdo_mysql
+          COPY app/src /var/www/html/
+    networks:
+      - external
+      - db
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=external"
+      - "traefik.http.routers.app-prod.rule=Host(`prod.td-grp1.anthonymoll.fr`)"
+      - "traefik.http.routers.app-prod.entrypoints=web"
+      - "traefik.http.services.app-prod.loadbalancer.server.port=80"
+    logging:
+      driver: loki
+      options:
+        loki-url: http://127.0.0.1:3100/loki/api/v1/push
+        loki-pipeline-stages: |
+          - regex:
+              expression: '(level|lvl|severity)=(?P<level>\w+)'
+          - labels:
+              level:
+    ports : 
+        - "8100:80"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - db
+
+networks:
+  external:
+    external: true
+  db:
+    external: false
+
+volumes:
+  db_data:
